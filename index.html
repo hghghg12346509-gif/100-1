@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Arcade - Мини-игры</title>
+    <style>
+        /* ПАЛИТРА: ЧЕРНЫЙ, ЖЕЛТЫЙ, БЕЛЫЙ, КРАСНЫЙ */
+        :root {
+            --bg: #000000;
+            --yellow: #ffcc00;
+            --red: #ff3333;
+            --white: #ffffff;
+            --gray: #222222;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Courier New', Courier, monospace;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg);
+            color: var(--white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* --- НАВИГАЦИЯ --- */
+        header {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        h1 {
+            color: var(--yellow);
+            font-size: 40px;
+            margin: 0 0 15px 0;
+            text-shadow: 3px 3px 0 var(--red);
+            letter-spacing: 2px;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .btn-nav {
+            background: transparent;
+            color: var(--white);
+            border: 2px solid var(--white);
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn-nav:hover {
+            background: var(--white);
+            color: var(--bg);
+        }
+
+        .btn-nav.active {
+            border-color: var(--yellow);
+            color: var(--yellow);
+            box-shadow: 0 0 10px var(--yellow);
+        }
+
+        /* --- КОНТЕЙНЕРЫ ИГР --- */
+        .game-container {
+            display: none; /* Скрыто по умолчанию */
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .game-container.active {
+            display: flex;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- ИГРА 1: КРЕСТИКИ-НОЛИКИ --- */
+        #tic-tac-toe-board {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 5px;
+            background: var(--yellow);
+            padding: 5px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+
+        .cell {
+            background: var(--bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .cell:hover {
+            background: var(--gray);
+        }
+
+        .cell.x { color: var(--yellow); text-shadow: 0 0 10px var(--yellow); }
+        .cell.o { color: var(--red); text-shadow: 0 0 10px var(--red); }
+
+        /* --- ИГРА 2: ТЕТРИС --- */
+        .tetris-wrapper {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        #tetris-canvas {
+            background: var(--bg);
+            border: 3px solid var(--yellow);
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
+        }
+
+        .tetris-info {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .info-box {
+            border: 2px solid var(--white);
+            padding: 15px;
+            text-align: center;
+            background: var(--gray);
+        }
+
+        .info-box h3 { margin: 0 0 10px 0; color: var(--yellow); font-size: 16px; }
+        .info-box p { margin: 0; font-size: 24px; font-weight: bold; color: var(--white); }
+
+        /* --- ОБЩИЕ КНОПКИ --- */
+        .btn-action {
+            background: var(--red);
+            color: var(--white);
+            border: none;
+            padding: 12px 25px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: all 0.2s;
+            box-shadow: 0 4px 0 #990000;
+        }
+
+        .btn-action:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        .status-text {
+            font-size: 20px;
+            font-weight: bold;
+            height: 24px;
+            margin: 10px 0;
+            color: var(--yellow);
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Mega Arcade</h1>
+        <div class="nav-buttons">
+            <button class="btn-nav active" onclick="switchGame('tictactoe')">Крестики-нолики</button>
+            <button class="btn-nav" onclick="switchGame('tetris')">Тетрис</button>
+        </div>
+    </header>
+
+    <!-- КРЕСТИКИ-НОЛИКИ -->
+    <div id="game-tictactoe" class="game-container active">
+        <div class="status-text" id="ttt-status">Ход: Крестики (X)</div>
+        <div id="tic-tac-toe-board"></div>
+        <button class="btn-action" onclick="resetTTT()">Сбросить игру</button>
+    </div>
+
+    <!-- ТЕТРИС -->
+    <div id="game-tetris" class="game-container">
+        <div class="tetris-wrapper">
+            <canvas id="tetris-canvas" width="240" height="480"></canvas>
+            <div class="tetris-info">
+                <div class="info-box">
+                    <h3>Очки</h3>
+                    <p id="tetris-score">0</p>
+                </div>
+                <div class="info-box">
+                    <h3>Управление</h3>
+                    <p style="font-size: 12px; color: #aaa;">
+                        ← → : Движение<br>
+                        ↑ : Поворот<br>
+                        ↓ : Ускорить<br>
+                        Пробел : Сброс
+                    </p>
+                </div>
+                <button class="btn-action" onclick="resetTetris()">Заново</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ==========================================
+        // ЗВУКОВОЙ ДВИЖОК (8-БИТНЫЕ ЗВУКИ)
+        // ==========================================
+        let audioCtx;
+        
+        // Инициализация аудио при первом клике (требование браузеров)
+        document.body.addEventListener('click', () => {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }, { once: true });
+
+        function playSound(type) {
+            if (!audioCtx) return;
+            const osc = audioCtx.createOscillator();
+            const gain = audioCtx.createGain();
+            osc.connect(gain);
+            gain.connect(audioCtx.destination);
+
+            const now = audioCtx.currentTime;
+
+            if (type === 'click') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.exponentialRampToValueAtTime(600, now + 0.05);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now); osc.stop(now + 0.05);
+            } 
+            else if (type === 'win') {
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(400, now);
+                osc.frequency.setValueAtTime(600, now + 0.1);
+                osc.frequency.setValueAtTime(800, now + 0.2);
+                osc.frequency.setValueAtTime(1000, now + 0.3);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
+            }
+            else if (type === 'tetris_move') {
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(150, now);
+                gain.gain.setValueAtTime(0.05, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.start(now); osc.stop(now + 0.05);
+            }
+            else if (type === 'tetris_clear') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.exponentialRampToValueAtTime(800, now + 0.2);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+                osc.start(now); osc.stop(now + 0.3);
+            }
+            else if (type === 'game_over') {
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(300, now);
+                osc.frequency.linearRampToValueAtTime(50, now + 0.5);
+                gain.gain.setValueAtTime(0.1, now);
+                gain.gain.linearRampToValueAtTime(0, now + 0.5);
+                osc.start(now); osc.stop(now + 0.5);
+            }
+        }
+
+        // ==========================================
+        // НАВИГАЦИЯ ПО ВКЛАДКАМ
+        // ==========================================
+        function switchGame(game) {
+            document.querySelectorAll('.game-container').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.btn-nav').forEach(el => el.classList.remove('active'));
+            
+            document.getElementById(`game-${game}`).classList.add('active');
+            event.target.classList.add('active');
+
+            if (game === 'tetris') {
+                initTetris(); // Инициализация при переключении
+            }
+        }
+
+        // ==========================================
+        // ИГРА 1: КРЕСТИКИ-НОЛИКИ
+        // ==========================================
+        const boardEl = document.getElementById('tic-tac-toe-board');
+        const statusEl = document.getElementById('ttt-status');
+        let currentPlayer = 'X';
+        let gameState = ['', '', '', '', '', '', '', '', ''];
+
+        function initTTT() {
+            boardEl.innerHTML = '';
+            gameState = ['', '', '', '', '', '', '', '', ''];
+            currentPlayer = 'X';
+            statusEl.textContent = 'Ход: Крестики (X)';
+            statusEl.style.color = 'var(--yellow)';
+
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.addEventListener('click', () => handleTTTClick(i, cell));
+                boardEl.appendChild(cell);
+            }
+        }
+
+        function handleTTTClick(index, cell) {
+            if (gameState[index] !== '' || statusEl.textContent.includes('Победили') || statusEl.textContent.includes('Ничья')) return;
+
+            gameState[index] = currentPlayer;
+            cell.textContent = currentPlayer === 'X' ? '✕' : '◯';
+            cell.classList.add(currentPlayer.toLowerCase());
+            playSound('click');
+
+            if (checkTTTWin()) {
+                statusEl.textContent = `Победили ${currentPlayer === 'X' ? 'Крестики' : 'Нолики'}!`;
+                statusEl.style.color = currentPlayer === 'X' ? 'var(--yellow)' : 'var(--red)';
+                playSound('win');
+            } else if (!gameState.includes('')) {
+                statusEl.textContent = 'Ничья!';
+                statusEl.style.color = 'var(--white)';
+            } else {
+                currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                statusEl.textContent = `Ход: ${currentPlayer === 'X' ? 'Крестики' : 'Нолики'} (${currentPlayer})`;
+                statusEl.style.color = currentPlayer === 'X' ? 'var(--yellow)' : 'var(--red)';
+            }
+        }
+
+        function checkTTTWin() {
+            const wins = [
+                [0,1,2], [3,4,5], [6,7,8], // Горизонтали
+                [0,3,6], [1,4,7], [2,5,8], // Вертикали
+                [0,4,8], [2,4,6]           // Диагонали
+            ];
+            for (let w of wins) {
+                const [a,b,c] = w;
+                if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) return true;
+            }
+            return false;
+        }
+
+        function resetTTT() {
+            initTTT();
+            playSound('click');
+        }
+
+        // ==========================================
+        // ИГРА 2: ТЕТРИС
+        // ==========================================
+        const canvas = document.getElementById('tetris-canvas');
+        const ctx = canvas.getContext('2d');
+        const scoreEl = document.getElementById('tetris-score');
+        
+        const COLS = 10;
+        const ROWS = 20;
+        const BLOCK_SIZE = 24; // 24px * 10 = 240px ширина
+
+        let board = [];
+        let score = 0;
+        let dropCounter = 0;
+        let dropInterval = 800; // Скорость падения в мс
+        let lastTime = 0;
+        let tetrisInterval;
+
+        // Цвета фигур (используем только разрешенные: желтый, красный, белый)
+        const COLORS = [
+            null,
+            '#ffcc00', // Желтый (I)
+            '#ff3333', // Красный (J)
+            '#ffffff', // Белый (L)
+            '#ffcc00', // Желтый (O)
+            '#ff3333', // Красный (S)
+            '#ffffff', // Белый (T)
+            '#ff3333'  // Красный (Z)
+        ];
+
+        // Формы фигур
+        const PIECES = [
+            [],
+            [[0,0,0,0], [1,1,1,1], [0,0,0,0], [0,0,0,0]], // I
+            [[2,0,0], [2,2,2], [0,0,0]],                   // J
+            [[0,0,3], [3,3,3], [0,0,0]],                   // L
+            [[4,4], [4,4]],                                // O
+            [[0,5,5], [5,5,0], [0,0,0]],                   // S
+            [[0,6,0], [6,6,6], [0,0,0]],                   // T
+            [[7,7,0], [0,7,7], [0,0,0]]                    // Z
+        ];
+
+        let player = { pos: {x: 0, y: 0}, matrix: null };
+
+        function createMatrix(w, h) {
+            const matrix = [];
+            while (h--) matrix.push(new Array(w).fill(0));
+            return matrix;
+        }
+
+        function initTetris() {
+            clearInterval(tetrisInterval);
+            board = createMatrix(COLS, ROWS);
+            score = 0;
+            scoreEl.textContent = score;
+            dropInterval = 800;
+            resetPlayer();
+            
+            lastTime = 0;
+            tetrisInterval = requestAnimationFrame(updateTetris);
+        }
+
+        function resetPlayer() {
+            const pieces = '1234567';
+            const randPiece = pieces[Math.floor(Math.random() * pieces.length)];
+            player.matrix = PIECES[randPiece];
+            player.pos.y = 0;
+            player.pos.x = Math.floor(COLS / 2) - Math.floor(player.matrix[0].length / 2);
+
+            if (collide(board, player)) {
+                // Game Over
+                clearInterval(tetrisInterval);
+                playSound('game_over');
+                board = createMatrix(COLS, ROWS); // Очистка
+                setTimeout(() => alert('Игра окончена! Твой счет: ' + score), 100);
+            }
+        }
+
+        function collide(board, player) {
+            const m = player.matrix;
+            const o = player.pos;
+            for (let y = 0; y < m.length; ++y) {
+                for (let x = 0; x < m[y].length; ++x) {
+                    if (m[y][x] !== 0 && (board[y + o.y] && board[y + o.y][x + o.x]) !== 0) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        function merge(board, player) {
+            player.matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        board[y + player.pos.y][x + player.pos.x] = value;
+                    }
+                });
+            });
+        }
+
+        function rotate(matrix, dir) {
+            for (let y = 0; y < matrix.length; ++y) {
+                for (let x = 0; x < y; ++x) {
+                    [matrix[x][y], matrix[y][x]] = [matrix[y][x], matrix[x][y]];
+                }
+            }
+            if (dir > 0) matrix.forEach(row => row.reverse());
+            else matrix.reverse();
+        }
+
+        function playerDrop() {
+            player.pos.y++;
+            if (collide(board, player)) {
+                player.pos.y--;
+                merge(board, player);
+                resetPlayer();
+                clearLines();
+            }
+            dropCounter = 0;
+            playSound('tetris_move');
+        }
+
+        function playerMove(dir) {
+            player.pos.x += dir;
+            if (collide(board, player)) player.pos.x -= dir;
+            playSound('tetris_move');
+        }
+
+        function playerRotate() {
+            const pos = player.pos.x;
+            let offset = 1;
+            rotate(player.matrix, 1);
+            while (collide(board, player)) {
+                player.pos.x += offset;
+                offset = -(offset + (offset > 0 ? 1 : -1));
+                if (offset > player.matrix[0].length) {
+                    rotate(player.matrix, -1);
+                    player.pos.x = pos;
+                    return;
+                }
+            }
+            playSound('tetris_move');
+        }
+
+        function clearLines() {
+            let linesCleared = 0;
+            outer: for (let y = board.length - 1; y >= 0; --y) {
+                for (let x = 0; x < board[y].length; ++x) {
+                    if (board[y][x] === 0) continue outer;
+                }
+                const row = board.splice(y, 1)[0].fill(0);
+                board.unshift(row);
+                ++y;
+                linesCleared++;
+            }
+            if (linesCleared > 0) {
+                score += linesCleared * 100;
+                scoreEl.textContent = score;
+                playSound('tetris_clear');
+                if (dropInterval > 100) dropInterval -= 50; // Ускорение
+            }
+        }
+
+        function draw() {
+            // Очистка
+            ctx.fillStyle = '#000000';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            // Сетка (едва заметная)
+            ctx.strokeStyle = '#222222';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= COLS; i++) {
+                ctx.beginPath(); ctx.moveTo(i * BLOCK_SIZE, 0); ctx.lineTo(i * BLOCK_SIZE, canvas.height); ctx.stroke();
+            }
+            for (let j = 0; j <= ROWS; j++) {
+                ctx.beginPath(); ctx.moveTo(0, j * BLOCK_SIZE); ctx.lineTo(canvas.width, j * BLOCK_SIZE); ctx.stroke();
+            }
+
+            drawMatrix(board, {x: 0, y: 0});
+            drawMatrix(player.matrix, player.pos);
+        }
+
+        function drawMatrix(matrix, offset) {
+            matrix.forEach((row, y) => {
+                row.forEach((value, x) => {
+                    if (value !== 0) {
+                        ctx.fillStyle = COLORS[value];
+                        ctx.fillRect((x + offset.x) * BLOCK_SIZE, (y + offset.y) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+                        // Внутренняя тень для объема
+                        ctx.strokeStyle = '#000';
+                        ctx.lineWidth = 2;
+                        ctx.strokeRect((x + offset.x) * BLOCK_SIZE, (y + offset.y) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+                    }
+                });
+            });
+        }
+
+        function updateTetris(time = 0) {
+            if (!document.getElementById('game-tetris').classList.contains('active')) return;
+
+            const deltaTime = time - lastTime;
+            lastTime = time;
+            dropCounter += deltaTime;
+            
+            if (dropCounter > dropInterval) {
+                playerDrop();
+            }
+            draw();
+            requestAnimationFrame(updateTetris);
+        }
+
+        function resetTetris() {
+            initTetris();
+            playSound('click');
+        }
+
+        // Управление
+        document.addEventListener('keydown', e => {
+            if (!document.getElementById('game-tetris').classList.contains('active')) return;
+            
+            if (e.key === 'ArrowLeft') playerMove(-1);
+            else if (e.key === 'ArrowRight') playerMove(1);
+            else if (e.key === 'ArrowDown') playerDrop();
+            else if (e.key === 'ArrowUp') playerRotate();
+            else if (e.key === ' ') { // Пробел - сброс
+                e.preventDefault();
+                resetTetris();
+            }
+        });
+
+        // Инициализация при загрузке
+        initTTT();
+    </script>
+</body>
+</html>
