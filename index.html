@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Arcade - 10 игр</title>
+    <title>Mega Arcade - 15 игр</title>
     <style>
         /* ПАЛИТРА */
         :root {
@@ -35,14 +35,14 @@
         /* --- НАВИГАЦИЯ --- */
         header {
             text-align: center;
-            margin: 20px 0;
+            margin: 15px 0;
             width: 100%;
         }
 
         h1 {
             color: var(--yellow);
-            font-size: 36px;
-            margin: 0 0 15px 0;
+            font-size: 32px;
+            margin: 0 0 10px 0;
             text-shadow: 3px 3px 0 var(--red);
             letter-spacing: 2px;
         }
@@ -50,10 +50,10 @@
         .nav-buttons {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            gap: 6px;
             justify-content: center;
             padding: 0 10px;
-            max-width: 800px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -61,12 +61,13 @@
             background: transparent;
             color: var(--white);
             border: 2px solid var(--white);
-            padding: 6px 12px;
-            font-size: 13px;
+            padding: 5px 10px;
+            font-size: 12px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
             text-transform: uppercase;
+            border-radius: 4px;
         }
 
         .btn-nav:hover { background: var(--white); color: var(--bg); }
@@ -81,6 +82,7 @@
             animation: fadeIn 0.3s ease;
             width: 100%;
             max-width: 500px;
+            padding: 0 15px;
         }
 
         .game-container.active { display: flex; }
@@ -102,6 +104,7 @@
             transition: all 0.2s;
             box-shadow: 0 4px 0 #990000;
             margin-top: 10px;
+            border-radius: 5px;
         }
 
         .btn-action:active { transform: translateY(4px); box-shadow: none; }
@@ -117,49 +120,49 @@
 
         /* --- 1. КРЕСТИКИ-НОЛИКИ --- */
         #tic-tac-toe-board {
-            display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px);
-            gap: 5px; background: var(--yellow); padding: 5px; border-radius: 5px; margin-bottom: 20px;
+            display: grid; grid-template-columns: repeat(3, 90px); grid-template-rows: repeat(3, 90px);
+            gap: 5px; background: var(--yellow); padding: 5px; border-radius: 5px; margin-bottom: 10px;
         }
-        .cell { background: var(--bg); display: flex; justify-content: center; align-items: center; font-size: 60px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
+        .cell { background: var(--bg); display: flex; justify-content: center; align-items: center; font-size: 50px; font-weight: bold; cursor: pointer; transition: background 0.2s; }
         .cell:hover { background: var(--gray); }
         .cell.x { color: var(--yellow); text-shadow: 0 0 10px var(--yellow); }
         .cell.o { color: var(--red); text-shadow: 0 0 10px var(--red); }
 
         /* --- 2. ТЕТРИС --- */
-        .tetris-wrapper { display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
-        #tetris-canvas { background: var(--bg); border: 3px solid var(--yellow); border-radius: 5px; box-shadow: 0 0 15px rgba(255, 204, 0, 0.3); }
-        .tetris-info { display: flex; flex-direction: column; gap: 15px; }
-        .info-box { border: 2px solid var(--white); padding: 10px; text-align: center; background: var(--gray); }
-        .info-box h3 { margin: 0 0 5px 0; color: var(--yellow); font-size: 14px; }
-        .info-box p { margin: 0; font-size: 20px; font-weight: bold; color: var(--white); }
+        .tetris-wrapper { display: flex; gap: 15px; align-items: flex-start; flex-wrap: wrap; justify-content: center; }
+        #tetris-canvas { background: var(--bg); border: 3px solid var(--yellow); border-radius: 5px; box-shadow: 0 0 15px rgba(255, 204, 0, 0.3); max-width: 100%; }
+        .tetris-info { display: flex; flex-direction: column; gap: 10px; }
+        .info-box { border: 2px solid var(--white); padding: 8px; text-align: center; background: var(--gray); }
+        .info-box h3 { margin: 0 0 5px 0; color: var(--yellow); font-size: 12px; }
+        .info-box p { margin: 0; font-size: 16px; font-weight: bold; color: var(--white); }
 
         /* --- 3. РЕФЛЕКС --- */
-        .reflex-grid { display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 10px; margin: 20px 0; }
+        .reflex-grid { display: grid; grid-template-columns: repeat(3, 90px); grid-template-rows: repeat(3, 90px); gap: 10px; margin: 10px 0; }
         .reflex-cell { background: var(--gray); border: 2px solid #444; border-radius: 10px; cursor: pointer; transition: background 0.1s; }
         .reflex-cell.active { background: var(--yellow); box-shadow: 0 0 20px var(--yellow); }
         .reflex-cell.error { background: var(--red); box-shadow: 0 0 20px var(--red); }
 
-        /* --- 4. ПАМЯТЬ (УСЛОЖНЕННАЯ) --- */
-        .memory-grid { display: grid; grid-template-columns: repeat(3, 100px); grid-template-rows: repeat(3, 100px); gap: 10px; margin: 20px 0; }
-        .memory-cell { background: var(--gray); border: 2px solid #444; border-radius: 10px; cursor: pointer; transition: all 0.2s; }
-        .memory-cell.flash { background: var(--yellow); box-shadow: 0 0 20px var(--yellow); }
-        .memory-cell.correct { background: var(--white); box-shadow: 0 0 20px var(--white); cursor: default; }
-        .memory-cell.wrong { background: var(--red); box-shadow: 0 0 20px var(--red); }
+        /* --- 4. ПАМЯТЬ (УСЛОЖНЕННАЯ 4x4) --- */
+        .memory-grid { display: grid; grid-template-columns: repeat(4, 70px); grid-template-rows: repeat(4, 70px); gap: 8px; margin: 10px 0; }
+        .memory-cell { background: var(--gray); border: 2px solid #444; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+        .memory-cell.flash { background: var(--yellow); box-shadow: 0 0 15px var(--yellow); }
+        .memory-cell.correct { background: var(--white); box-shadow: 0 0 15px var(--white); cursor: default; }
+        .memory-cell.wrong { background: var(--red); box-shadow: 0 0 15px var(--red); }
 
         /* --- 5. ЦВЕТОВОЙ КОНТРАСТ --- */
-        .color-word { font-size: 60px; font-weight: 900; margin: 40px 0; text-shadow: 0 0 20px rgba(255,255,255,0.2); letter-spacing: 5px; }
-        .color-btn-container { display: flex; gap: 20px; }
-        .color-btn { width: 120px; height: 60px; border: none; font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 10px; transition: transform 0.1s; }
+        .color-word { font-size: 50px; font-weight: 900; margin: 30px 0; text-shadow: 0 0 20px rgba(255,255,255,0.2); letter-spacing: 5px; text-align: center; }
+        .color-btn-container { display: flex; gap: 15px; }
+        .color-btn { width: 110px; height: 50px; border: none; font-size: 16px; font-weight: bold; cursor: pointer; border-radius: 10px; transition: transform 0.1s; }
         .color-btn:active { transform: scale(0.95); }
         .color-btn.red-btn { background: var(--red); color: white; box-shadow: 0 0 15px var(--red); }
         .color-btn.yellow-btn { background: var(--yellow); color: black; box-shadow: 0 0 15px var(--yellow); }
 
         /* --- 6. МИШЕНЬ --- */
-        #aim-area { position: relative; width: 300px; height: 300px; border: 2px solid var(--white); overflow: hidden; background: #050505; margin: 20px 0; }
+        #aim-area { position: relative; width: 280px; height: 280px; border: 2px solid var(--white); overflow: hidden; background: #050505; margin: 10px 0; }
         .aim-target { position: absolute; width: 40px; height: 40px; background: var(--red); border-radius: 50%; cursor: crosshair; box-shadow: 0 0 15px var(--red); transform: translate(-50%, -50%); transition: width 0.2s, height 0.2s; }
 
         /* --- 7. САЙМОН --- */
-        .simon-grid { display: grid; grid-template-columns: repeat(2, 120px); grid-template-rows: repeat(2, 120px); gap: 10px; margin: 20px 0; }
+        .simon-grid { display: grid; grid-template-columns: repeat(2, 110px); grid-template-rows: repeat(2, 110px); gap: 10px; margin: 10px 0; }
         .simon-btn { border-radius: 15px; cursor: pointer; opacity: 0.3; transition: opacity 0.1s; }
         .simon-btn.active { opacity: 1; box-shadow: 0 0 30px currentColor; }
         .simon-btn[data-color="red"] { background: var(--red); color: var(--red); }
@@ -168,46 +171,83 @@
         .simon-btn[data-color="gray"] { background: #555; color: #555; }
 
         /* --- 8. КЛИКЕР --- */
-        #clicker-btn { width: 200px; height: 200px; border-radius: 50%; background: var(--yellow); border: 5px solid var(--white); font-size: 30px; font-weight: bold; cursor: pointer; box-shadow: 0 0 30px var(--yellow); margin: 20px 0; transition: transform 0.05s; }
+        #clicker-btn { width: 180px; height: 180px; border-radius: 50%; background: var(--yellow); border: 5px solid var(--white); font-size: 26px; font-weight: bold; cursor: pointer; box-shadow: 0 0 30px var(--yellow); margin: 10px 0; transition: transform 0.05s; }
         #clicker-btn:active { transform: scale(0.9); }
 
         /* --- 9. УСПЕЙ НАЖАТЬ --- */
-        .timing-bar-container { width: 300px; height: 40px; border: 2px solid var(--white); background: #111; position: relative; margin: 20px 0; overflow: hidden; }
+        .timing-bar-container { width: 280px; height: 40px; border: 2px solid var(--white); background: #111; position: relative; margin: 20px 0; overflow: hidden; }
         #timing-fill { position: absolute; left: 0; top: 0; height: 100%; width: 0%; background: var(--red); transition: width 0.05s linear; }
         .timing-zone { position: absolute; right: 0; top: 0; height: 100%; width: 20%; background: rgba(255, 204, 0, 0.4); border-left: 2px solid var(--yellow); }
-        #timing-btn { width: 200px; padding: 20px; font-size: 20px; font-weight: bold; background: var(--white); color: black; border: none; cursor: pointer; }
+        #timing-btn { width: 200px; padding: 15px; font-size: 18px; font-weight: bold; background: var(--white); color: black; border: none; cursor: pointer; }
 
         /* --- 10. ЗМЕЙКА --- */
-        #snake-canvas { background: var(--bg); border: 3px solid var(--yellow); border-radius: 5px; margin: 20px 0; box-shadow: 0 0 15px rgba(255, 204, 0, 0.3); }
-        .snake-controls { display: grid; grid-template-columns: repeat(3, 60px); gap: 5px; margin-top: 10px; }
-        .snake-btn { width: 60px; height: 60px; background: var(--gray); border: 2px solid var(--white); color: var(--white); font-size: 24px; font-weight: bold; cursor: pointer; border-radius: 10px; }
+        #snake-canvas { background: var(--bg); border: 3px solid var(--yellow); border-radius: 5px; margin: 10px 0; box-shadow: 0 0 15px rgba(255, 204, 0, 0.3); max-width: 100%; }
+        .snake-controls { display: grid; grid-template-columns: repeat(3, 50px); gap: 5px; margin-top: 5px; }
+        .snake-btn { width: 50px; height: 50px; background: var(--gray); border: 2px solid var(--white); color: var(--white); font-size: 20px; font-weight: bold; cursor: pointer; border-radius: 8px; }
         .snake-btn:active { background: var(--white); color: var(--bg); }
-        .snake-empty { width: 60px; height: 60px; }
+        .snake-empty { width: 50px; height: 50px; }
+
+        /* --- 11. МАТЕМАТИКА --- */
+        .math-question { font-size: 48px; font-weight: bold; color: var(--white); margin: 20px 0; text-shadow: 0 0 15px var(--yellow); }
+        .math-options { display: grid; grid-template-columns: repeat(2, 100px); gap: 10px; }
+        .math-btn { padding: 15px; font-size: 24px; font-weight: bold; background: var(--gray); color: var(--white); border: 2px solid var(--white); cursor: pointer; border-radius: 8px; transition: background 0.2s; }
+        .math-btn:hover { background: var(--yellow); color: black; }
+
+        /* --- 12. ПЕЧАТЬ --- */
+        .typing-word { font-size: 36px; font-weight: bold; color: var(--yellow); margin: 20px 0; letter-spacing: 3px; }
+        .typing-input { width: 80%; padding: 10px; font-size: 20px; text-align: center; background: #111; border: 2px solid var(--white); color: white; border-radius: 5px; margin-bottom: 15px; outline: none; }
+        .typing-input:focus { border-color: var(--yellow); box-shadow: 0 0 10px var(--yellow); }
+
+        /* --- 13. ДУЭЛЬ --- */
+        #duel-screen { width: 280px; height: 280px; display: flex; justify-content: center; align-items: center; border-radius: 15px; cursor: pointer; margin: 20px 0; text-align: center; font-size: 24px; font-weight: bold; transition: background 0.1s; }
+        #duel-screen.waiting { background: var(--red); color: var(--white); }
+        #duel-screen.ready { background: var(--yellow); color: black; box-shadow: 0 0 40px var(--yellow); }
+
+        /* --- 14. САПЕР --- */
+        .mines-grid { display: grid; grid-template-columns: repeat(5, 45px); grid-template-rows: repeat(5, 45px); gap: 3px; margin: 15px 0; }
+        .mine-cell { background: var(--gray); border: 1px solid #444; display: flex; justify-content: center; align-items: center; font-weight: bold; font-size: 18px; cursor: pointer; color: var(--white); }
+        .mine-cell.opened { background: #111; cursor: default; border: 1px solid #222; }
+        .mine-cell.bomb { background: var(--red); color: black; }
+        .mine-cell.safe { background: var(--yellow); color: black; }
+
+        /* --- 15. НАЙДИ ПАРУ --- */
+        .pairs-grid { display: grid; grid-template-columns: repeat(4, 70px); grid-template-rows: repeat(4, 70px); gap: 8px; margin: 10px 0; }
+        .pair-card { background: var(--gray); border: 2px solid var(--white); border-radius: 8px; display: flex; justify-content: center; align-items: center; font-size: 30px; cursor: pointer; transition: transform 0.2s; color: transparent; }
+        .pair-card.flipped { background: var(--white); color: black; transform: rotateY(180deg); }
+        .pair-card.matched { background: var(--yellow); border-color: var(--yellow); color: black; cursor: default; transform: rotateY(180deg); }
 
         /* АДАПТИВ */
         @media (max-width: 600px) {
-            .reflex-grid, .memory-grid, #tic-tac-toe-board { grid-template-columns: repeat(3, 80px); grid-template-rows: repeat(3, 80px); }
+            .memory-grid { grid-template-columns: repeat(4, 60px); grid-template-rows: repeat(4, 60px); }
+            .pairs-grid { grid-template-columns: repeat(4, 60px); grid-template-rows: repeat(4, 60px); }
             .cell { font-size: 40px; }
-            .color-word { font-size: 40px; }
+            .color-word { font-size: 36px; }
             .simon-grid { grid-template-columns: repeat(2, 90px); grid-template-rows: repeat(2, 90px); }
+            .math-question { font-size: 36px; }
+            .typing-word { font-size: 26px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <h1>Mega Arcade</h1>
+        <h1>Mega Arcade - 15</h1>
         <div class="nav-buttons">
             <button class="btn-nav active" onclick="switchGame('tictactoe', this)">Крестики-нолики</button>
             <button class="btn-nav" onclick="switchGame('tetris', this)">Тетрис</button>
             <button class="btn-nav" onclick="switchGame('reflex', this)">Рефлекс</button>
-            <button class="btn-nav" onclick="switchGame('memory', this)">Память</button>
+            <button class="btn-nav" onclick="switchGame('memory', this)">Память 4x4</button>
             <button class="btn-nav" onclick="switchGame('color', this)">Контраст</button>
             <button class="btn-nav" onclick="switchGame('aim', this)">Мишень</button>
             <button class="btn-nav" onclick="switchGame('simon', this)">Саймон</button>
             <button class="btn-nav" onclick="switchGame('clicker', this)">Кликер</button>
             <button class="btn-nav" onclick="switchGame('timing', this)">Успей нажать</button>
             <button class="btn-nav" onclick="switchGame('snake', this)">Змейка</button>
+            <button class="btn-nav" onclick="switchGame('math', this)">Математика</button>
+            <button class="btn-nav" onclick="switchGame('typing', this)">Печать</button>
+            <button class="btn-nav" onclick="switchGame('duel', this)">Дуэль</button>
+            <button class="btn-nav" onclick="switchGame('mines', this)">Сапер</button>
+            <button class="btn-nav" onclick="switchGame('pairs', this)">Найди пару</button>
         </div>
     </header>
 
@@ -224,7 +264,7 @@
             <canvas id="tetris-canvas" width="240" height="480"></canvas>
             <div class="tetris-info">
                 <div class="info-box"><h3>Очки</h3><p id="tetris-score">0</p></div>
-                <div class="info-box"><h3>Управление</h3><p style="font-size: 12px; color: #aaa; text-align: left;">← → : Движение<br>↑ : Поворот<br>↓ : Ускорить<br>Пробел : Сброс</p></div>
+                <div class="info-box"><h3>Управление</h3><p style="font-size: 11px; color: #aaa; text-align: left;">← → : Движение<br>↑ : Поворот<br>↓ : Ускорить<br>Пробел : Сброс</p></div>
                 <button class="btn-action" onclick="resetTetris()">Заново</button>
             </div>
         </div>
@@ -302,12 +342,49 @@
             <button class="snake-btn" onclick="snakeDir(0, -1)">↑</button>
             <div class="snake-empty"></div>
             <button class="snake-btn" onclick="snakeDir(-1, 0)">←</button>
-            <button class="snake-btn" onclick="startSnake()">Старт</button>
+            <button class="snake-btn" onclick="startSnake()">Ст</button>
             <button class="snake-btn" onclick="snakeDir(1, 0)">→</button>
             <div class="snake-empty"></div>
             <button class="snake-btn" onclick="snakeDir(0, 1)">↓</button>
             <div class="snake-empty"></div>
         </div>
+    </div>
+
+    <!-- 11. МАТЕМАТИКА -->
+    <div id="game-math" class="game-container">
+        <div class="status-text" id="math-status">Нажми "Старт"</div>
+        <div class="math-question" id="math-question">2 + 2 = ?</div>
+        <div class="math-options" id="math-options"></div>
+        <button class="btn-action" id="math-btn" onclick="startMath()">Старт</button>
+    </div>
+
+    <!-- 12. ПЕЧАТЬ -->
+    <div id="game-typing" class="game-container">
+        <div class="status-text" id="typing-status">Нажми "Старт"</div>
+        <div class="typing-word" id="typing-word">СЛОВО</div>
+        <input type="text" id="typing-input" class="typing-input" placeholder="Печатай здесь..." disabled>
+        <button class="btn-action" id="typing-btn" onclick="startTyping()">Старт</button>
+    </div>
+
+    <!-- 13. ДУЭЛЬ -->
+    <div id="game-duel" class="game-container">
+        <div class="status-text" id="duel-status">Нажми "Старт"</div>
+        <div id="duel-screen" class="waiting">ЖДИ...</div>
+        <button class="btn-action" id="duel-btn" onclick="startDuel()">Старт</button>
+    </div>
+
+    <!-- 14. САПЕР -->
+    <div id="game-mines" class="game-container">
+        <div class="status-text" id="mines-status">Нажми "Старт"</div>
+        <div class="mines-grid" id="mines-grid"></div>
+        <button class="btn-action" id="mines-btn" onclick="startMines()">Старт</button>
+    </div>
+
+    <!-- 15. НАЙДИ ПАРУ -->
+    <div id="game-pairs" class="game-container">
+        <div class="status-text" id="pairs-status">Нажми "Старт"</div>
+        <div class="pairs-grid" id="pairs-grid"></div>
+        <button class="btn-action" id="pairs-btn" onclick="startPairs()">Старт</button>
     </div>
 
     <script>
@@ -351,17 +428,10 @@
                 osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, now); osc.frequency.linearRampToValueAtTime(50, now + 0.5);
                 gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.5);
                 osc.start(now); osc.stop(now + 0.5);
-            } else if (type === 'simon_red') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(329.63, now); gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'simon_yellow') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(261.63, now); gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'simon_white') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(392.00, now); gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
-                osc.start(now); osc.stop(now + 0.3);
-            } else if (type === 'simon_gray') {
-                osc.type = 'sine'; osc.frequency.setValueAtTime(196.00, now); gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            } else if (type.startsWith('simon_')) {
+                const color = type.split('_')[1];
+                const freqs = { red: 329.63, yellow: 261.63, white: 392.00, gray: 196.00 };
+                osc.type = 'sine'; osc.frequency.setValueAtTime(freqs[color], now); gain.gain.setValueAtTime(0.2, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                 osc.start(now); osc.stop(now + 0.3);
             }
         }
@@ -379,6 +449,10 @@
             clearInterval(clickerInterval);
             clearInterval(timingInterval);
             clearInterval(snakeInterval);
+            clearInterval(mathInterval);
+            clearInterval(typingInterval);
+            clearTimeout(duelTimeout);
+            clearTimeout(duelWaitTimeout);
         }
 
         function switchGame(game, btnElement) {
@@ -399,6 +473,11 @@
             if (game === 'clicker') initClicker();
             if (game === 'timing') initTiming();
             if (game === 'snake') initSnake();
+            if (game === 'math') initMath();
+            if (game === 'typing') initTyping();
+            if (game === 'duel') initDuel();
+            if (game === 'mines') initMines();
+            if (game === 'pairs') initPairs();
         }
 
         // ==========================================
@@ -578,7 +657,7 @@
         }
 
         // ==========================================
-        // 4. ПАМЯТЬ (УСЛОЖНЕННАЯ: ПОРЯДОК ВАЖЕН)
+        // 4. ПАМЯТЬ (УСЛОЖНЕННАЯ)
         // ==========================================
         const memoryGrid = document.getElementById('memory-grid');
         const memoryStatus = document.getElementById('memory-status');
@@ -588,7 +667,7 @@
         function initMemory() {
             clearTimeout(memoryTimeout); memoryGrid.innerHTML = ''; memoryLevel = 1;
             memoryStatus.textContent = 'Нажми "Старт"'; memoryBtn.textContent = 'Старт'; memoryActive = false;
-            for (let i = 0; i < 9; i++) {
+            for (let i = 0; i < 16; i++) {
                 const cell = document.createElement('div'); cell.classList.add('memory-cell'); cell.dataset.index = i;
                 cell.addEventListener('click', () => handleMemoryClick(cell));
                 memoryGrid.appendChild(cell);
@@ -604,12 +683,10 @@
             
             const cells = Array.from(memoryGrid.querySelectorAll('.memory-cell'));
             memoryTargets = [];
-            const numTargets = Math.min(memoryLevel + 1, 9); 
+            const numTargets = Math.min(memoryLevel + 2, 10); // Начинаем с 3
             
-            // Генерируем уникальные индексы
-            const indices = Array.from({length: 9}, (_, i) => i).sort(() => Math.random() - 0.5).slice(0, numTargets);
+            const indices = Array.from({length: 16}, (_, i) => i).sort(() => Math.random() - 0.5).slice(0, numTargets);
             
-            // Проигрываем последовательность
             let i = 0;
             const playSeq = () => {
                 if (i >= indices.length) {
@@ -621,16 +698,15 @@
                 cell.classList.add('flash'); playSound('click');
                 setTimeout(() => {
                     cell.classList.remove('flash'); i++;
-                    setTimeout(playSeq, 200); // Пауза между вспышками
-                }, 400);
+                    setTimeout(playSeq, 200);
+                }, 400); // Скорость вспышки
             };
             playSeq();
-            memoryTargets = indices.map(idx => cells[idx]); // Сохраняем порядок
+            memoryTargets = indices.map(idx => cells[idx]); 
         }
         function handleMemoryClick(cell) {
             if (!memoryActive || cell.classList.contains('correct')) return;
             
-            // Проверяем, совпадает ли нажатая клетка с текущим шагом
             if (memoryTargets[memoryInputIndex] === cell) {
                 cell.classList.add('correct'); playSound('click');
                 memoryInputIndex++;
@@ -853,7 +929,7 @@
         const snakeCtx = snakeCanvas.getContext('2d');
         const snakeStatus = document.getElementById('snake-status');
         let snakeInterval, snakeActive = false;
-        let snakeGrid = 15, snakeCell = 20; // 15x15 клеток по 20px
+        let snakeGrid = 15, snakeCell = 20;
         let snake, food, dx, dy, snakeScore, snakeSpeed;
 
         function initSnake() {
@@ -872,23 +948,17 @@
         }
         function snakeDir(nx, ny) {
             if (!snakeActive) return;
-            if (dx === -nx && dy === -ny) return; // Запрет разворота на 180
+            if (dx === -nx && dy === -ny) return; 
             dx = nx; dy = ny;
         }
         function updateSnake() {
             if (!snakeActive) return;
-            
             const head = { x: snake[0].x + dx, y: snake[0].y + dy };
-            
-            // Стены
             if (head.x < 0 || head.x >= snakeGrid || head.y < 0 || head.y >= snakeGrid) { endSnake(); return; }
-            // Себя
             for (let i = 0; i < snake.length; i++) {
                 if (snake[i].x === head.x && snake[i].y === head.y) { endSnake(); return; }
             }
-            
             snake.unshift(head);
-            
             if (head.x === food.x && head.y === food.y) {
                 snakeScore += 10; snakeStatus.textContent = `Счёт: ${snakeScore}`;
                 playSound('tetris_clear'); spawnFood();
@@ -900,9 +970,7 @@
         }
         function drawSnake() {
             snakeCtx.fillStyle = '#000'; snakeCtx.fillRect(0, 0, 300, 300);
-            // Еда
             snakeCtx.fillStyle = 'var(--red)'; snakeCtx.fillRect(food.x * snakeCell, food.y * snakeCell, snakeCell - 2, snakeCell - 2);
-            // Змейка
             snake.forEach((part, index) => {
                 snakeCtx.fillStyle = index === 0 ? 'var(--white)' : 'var(--yellow)';
                 snakeCtx.fillRect(part.x * snakeCell, part.y * snakeCell, snakeCell - 2, snakeCell - 2);
@@ -912,7 +980,6 @@
             snakeActive = false; clearInterval(snakeInterval); playSound('game_over');
             snakeStatus.textContent = `Игра окончена! Счёт: ${snakeScore}`;
         }
-        // Свайпы для телефона
         let touchStartX = 0, touchStartY = 0;
         snakeCanvas.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; touchStartY = e.touches[0].clientY; }, {passive: true});
         snakeCanvas.addEventListener('touchend', e => {
@@ -929,7 +996,312 @@
             else if (e.key === 'ArrowRight') snakeDir(1,0);
         });
 
-        // Старт первой игры
+        // ==========================================
+        // 11. МАТЕМАТИКА
+        // ==========================================
+        const mathQuestion = document.getElementById('math-question');
+        const mathOptions = document.getElementById('math-options');
+        const mathStatus = document.getElementById('math-status');
+        const mathBtn = document.getElementById('math-btn');
+        let mathScore = 0, mathInterval, mathAnswer = 0, mathTimeLeft = 5, mathActive = false;
+
+        function initMath() {
+            clearInterval(mathInterval); mathScore = 0; mathActive = false;
+            mathQuestion.textContent = '2 + 2 = ?'; mathOptions.innerHTML = '';
+            mathStatus.textContent = 'Нажми "Старт"'; mathBtn.textContent = 'Старт';
+        }
+        function startMath() {
+            initMath(); playSound('click'); mathActive = true; mathBtn.textContent = 'Игра идёт...';
+            nextMathRound();
+        }
+        function nextMathRound() {
+            if (!mathActive) return;
+            clearInterval(mathInterval);
+            mathTimeLeft = 5;
+            mathStatus.textContent = `Счёт: ${mathScore} | Время: ${mathTimeLeft}с`;
+            
+            const a = Math.floor(Math.random() * 20) + 1;
+            const b = Math.floor(Math.random() * 20) + 1;
+            mathAnswer = a + b;
+            mathQuestion.textContent = `${a} + ${b} = ?`;
+            
+            let options = [mathAnswer];
+            while (options.length < 4) {
+                let wrong = mathAnswer + (Math.floor(Math.random() * 10) - 5);
+                if (wrong !== mathAnswer && wrong > 0 && !options.includes(wrong)) options.push(wrong);
+            }
+            options.sort(() => Math.random() - 0.5);
+            
+            mathOptions.innerHTML = '';
+            options.forEach(opt => {
+                const btn = document.createElement('button');
+                btn.classList.add('math-btn'); btn.textContent = opt;
+                btn.onclick = () => {
+                    if (!mathActive) return;
+                    if (opt === mathAnswer) {
+                        playSound('win'); mathScore++; nextMathRound();
+                    } else {
+                        endMath('Неправильно!');
+                    }
+                };
+                mathOptions.appendChild(btn);
+            });
+
+            mathInterval = setInterval(() => {
+                mathTimeLeft--;
+                mathStatus.textContent = `Счёт: ${mathScore} | Время: ${mathTimeLeft}с`;
+                if (mathTimeLeft <= 0) endMath('Время вышло!');
+            }, 1000);
+        }
+        function endMath(reason) {
+            mathActive = false; clearInterval(mathInterval); playSound('game_over');
+            mathStatus.textContent = `${reason} Твой счёт: ${mathScore}`; mathBtn.textContent = 'Ещё раз';
+            mathOptions.innerHTML = '';
+        }
+
+        // ==========================================
+        // 12. ПЕЧАТЬ
+        // ==========================================
+        const typingWordEl = document.getElementById('typing-word');
+        const typingInput = document.getElementById('typing-input');
+        const typingStatus = document.getElementById('typing-status');
+        const typingBtn = document.getElementById('typing-btn');
+        let typingScore = 0, typingActive = false, typingTimeLeft = 5, typingInterval;
+        const wordsList = ['КОД', 'ИГРА', 'АРКАДА', 'ПИКСЕЛЬ', 'МЕЧ', 'ЩИТ', 'ЗВЕЗДА', 'НЕОН', 'ТЕТРИС', 'ЗМЕЙКА'];
+
+        function initTyping() {
+            clearInterval(typingInterval); typingScore = 0; typingActive = false;
+            typingWordEl.textContent = 'ГОТОВ?'; typingInput.value = ''; typingInput.disabled = true;
+            typingStatus.textContent = 'Нажми "Старт"'; typingBtn.textContent = 'Старт';
+        }
+        function startTyping() {
+            initTyping(); playSound('click'); typingActive = true; typingBtn.textContent = 'Игра идёт...';
+            typingInput.disabled = false; typingInput.focus();
+            nextTypingRound();
+        }
+        function nextTypingRound() {
+            if (!typingActive) return;
+            clearInterval(typingInterval);
+            typingTimeLeft = 5;
+            typingInput.value = '';
+            typingInput.focus();
+            
+            const word = wordsList[Math.floor(Math.random() * wordsList.length)];
+            typingWordEl.textContent = word;
+            typingStatus.textContent = `Счёт: ${typingScore} | Время: ${typingTimeLeft}с`;
+
+            typingInterval = setInterval(() => {
+                typingTimeLeft--;
+                typingStatus.textContent = `Счёт: ${typingScore} | Время: ${typingTimeLeft}с`;
+                if (typingTimeLeft <= 0) endTyping('Время вышло!');
+            }, 1000);
+        }
+        typingInput.addEventListener('input', (e) => {
+            if (!typingActive) return;
+            if (e.target.value.toUpperCase() === typingWordEl.textContent) {
+                playSound('win'); typingScore++; nextTypingRound();
+            }
+        });
+        function endTyping(reason) {
+            typingActive = false; clearInterval(typingInterval); playSound('game_over');
+            typingStatus.textContent = `${reason} Твой счёт: ${typingScore}`; typingBtn.textContent = 'Ещё раз';
+            typingInput.disabled = true; typingWordEl.textContent = 'ИГРА ОКОНЧЕНА';
+        }
+
+        // ==========================================
+        // 13. ДУЭЛЬ
+        // ==========================================
+        const duelScreen = document.getElementById('duel-screen');
+        const duelStatus = document.getElementById('duel-status');
+        const duelBtn = document.getElementById('duel-btn');
+        let duelActive = false, duelReady = false, duelStartTime = 0, duelTimeout, duelWaitTimeout;
+
+        function initDuel() {
+            clearTimeout(duelTimeout); clearTimeout(duelWaitTimeout);
+            duelActive = false; duelReady = false;
+            duelScreen.className = 'waiting'; duelScreen.textContent = 'ЖДИ...';
+            duelStatus.textContent = 'Нажми "Старт"'; duelBtn.textContent = 'Старт';
+        }
+        function startDuel() {
+            initDuel(); playSound('click'); duelActive = true; duelBtn.textContent = 'Игра идёт...';
+            duelScreen.textContent = 'ЖДИ ЗЕЛЕНЫЙ...';
+            
+            const delay = Math.random() * 3000 + 1000; // От 1 до 4 секунд
+            duelWaitTimeout = setTimeout(() => {
+                if (!duelActive) return;
+                duelReady = true;
+                duelScreen.className = 'ready'; duelScreen.textContent = 'ЖМИ!';
+                duelStartTime = Date.now();
+            }, delay);
+        }
+        duelScreen.addEventListener('click', () => {
+            if (!duelActive) return;
+            if (!duelReady) {
+                // Нажал слишком рано
+                endDuel('Слишком рано!', 0);
+            } else {
+                const reactionTime = Date.now() - duelStartTime;
+                endDuel(`Твоя реакция: ${reactionTime} мс`, reactionTime);
+            }
+        });
+        function endDuel(reason, time) {
+            duelActive = false; duelReady = false;
+            clearTimeout(duelWaitTimeout);
+            playSound(time > 0 ? 'win' : 'error');
+            duelStatus.textContent = reason;
+            duelScreen.className = 'waiting'; duelScreen.textContent = 'ЖДИ...';
+            duelBtn.textContent = 'Ещё раз';
+        }
+
+        // ==========================================
+        // 14. САПЕР (МИНИ)
+        // ==========================================
+        const minesGrid = document.getElementById('mines-grid');
+        const minesStatus = document.getElementById('mines-status');
+        const minesBtn = document.getElementById('mines-btn');
+        let minesActive = false, minesBoard = [], minesRevealedCount = 0, totalSafe = 0;
+
+        function initMines() {
+            minesActive = false; minesBoard = []; minesRevealedCount = 0;
+            minesGrid.innerHTML = ''; minesStatus.textContent = 'Нажми "Старт"'; minesBtn.textContent = 'Старт';
+        }
+        function startMines() {
+            initMines(); playSound('click'); minesActive = true; minesBtn.textContent = 'Игра идёт...';
+            
+            // Создаем поле 5x5
+            for (let i = 0; i < 25; i++) minesBoard.push({ bomb: false, revealed: false, count: 0 });
+            
+            // Ставим 3 мины
+            let bombsPlaced = 0;
+            while (bombsPlaced < 3) {
+                let idx = Math.floor(Math.random() * 25);
+                if (!minesBoard[idx].bomb) { minesBoard[idx].bomb = true; bombsPlaced++; }
+            }
+            
+            // Считаем мины вокруг
+            for (let i = 0; i < 25; i++) {
+                if (minesBoard[i].bomb) continue;
+                let count = 0;
+                const neighbors = getNeighbors(i);
+                neighbors.forEach(n => { if (minesBoard[n].bomb) count++; });
+                minesBoard[i].count = count;
+            }
+            
+            totalSafe = 25 - 3;
+            renderMines();
+        }
+        function getNeighbors(index) {
+            const row = Math.floor(index / 5), col = index % 5;
+            const neighbors = [];
+            for (let r = row - 1; r <= row + 1; r++) {
+                for (let c = col - 1; c <= col + 1; c++) {
+                    if (r >= 0 && r < 5 && c >= 0 && c < 5 && !(r === row && c === col)) {
+                        neighbors.push(r * 5 + c);
+                    }
+                }
+            }
+            return neighbors;
+        }
+        function renderMines() {
+            minesGrid.innerHTML = '';
+            minesBoard.forEach((cell, i) => {
+                const el = document.createElement('div');
+                el.classList.add('mine-cell');
+                if (cell.revealed) {
+                    el.classList.add('opened');
+                    if (cell.bomb) { el.classList.add('bomb'); el.textContent = '💥'; }
+                    else { el.textContent = cell.count > 0 ? cell.count : ''; if (cell.count > 0) el.style.color = 'var(--red)'; }
+                } else {
+                    el.onclick = () => revealMine(i);
+                }
+                minesGrid.appendChild(el);
+            });
+        }
+        function revealMine(idx) {
+            if (!minesActive || minesBoard[idx].revealed) return;
+            
+            minesBoard[idx].revealed = true;
+            if (minesBoard[idx].bomb) {
+                endMines('Бум! Ты подорвался.');
+                // Показываем все мины
+                minesBoard.forEach(c => { if (c.bomb) c.revealed = true; });
+                renderMines();
+            } else {
+                playSound('click'); minesRevealedCount++;
+                renderMines();
+                if (minesRevealedCount === totalSafe) endMines('Победа! Поле очищено.');
+            }
+        }
+        function endMines(reason) {
+            minesActive = false; playSound(reason.includes('Победа') ? 'win' : 'game_over');
+            minesStatus.textContent = reason; minesBtn.textContent = 'Ещё раз';
+            // Блокируем клики
+            document.querySelectorAll('.mine-cell').forEach(el => el.onclick = null);
+        }
+
+        // ==========================================
+        // 15. НАЙДИ ПАРУ
+        // ==========================================
+        const pairsGrid = document.getElementById('pairs-grid');
+        const pairsStatus = document.getElementById('pairs-status');
+        const pairsBtn = document.getElementById('pairs-btn');
+        let pairsActive = false, pairsCards = [], firstCard = null, secondCard = null, pairsLock = false, pairsMatched = 0;
+        const symbols = ['🍒', '🔔', '💎', '7️⃣', '🍋', '⭐', '🍉', '🔫'];
+
+        function initPairs() {
+            pairsActive = false; pairsCards = []; firstCard = null; secondCard = null; pairsLock = false; pairsMatched = 0;
+            pairsGrid.innerHTML = ''; pairsStatus.textContent = 'Нажми "Старт"'; pairsBtn.textContent = 'Старт';
+        }
+        function startPairs() {
+            initPairs(); playSound('click'); pairsActive = true; pairsBtn.textContent = 'Игра идёт...';
+            
+            let deck = [...symbols, ...symbols].sort(() => Math.random() - 0.5);
+            
+            deck.forEach(sym => {
+                const el = document.createElement('div');
+                el.classList.add('pair-card');
+                el.dataset.symbol = sym;
+                el.textContent = sym;
+                el.onclick = () => flipCard(el);
+                pairsGrid.appendChild(el);
+                pairsCards.push(el);
+            });
+        }
+        function flipCard(card) {
+            if (!pairsActive || pairsLock || card.classList.contains('flipped') || card.classList.contains('matched')) return;
+            
+            card.classList.add('flipped'); playSound('click');
+            
+            if (!firstCard) {
+                firstCard = card;
+            } else {
+                secondCard = card;
+                pairsLock = true;
+                checkPair();
+            }
+        }
+        function checkPair() {
+            if (firstCard.dataset.symbol === secondCard.dataset.symbol) {
+                playSound('win');
+                firstCard.classList.add('matched'); secondCard.classList.add('matched');
+                pairsMatched++;
+                resetTurn();
+                if (pairsMatched === 8) {
+                    pairsActive = false; pairsStatus.textContent = 'Победа! Все пары найдены.'; pairsBtn.textContent = 'Ещё раз';
+                }
+            } else {
+                playSound('error');
+                setTimeout(() => {
+                    firstCard.classList.remove('flipped'); secondCard.classList.remove('flipped');
+                    resetTurn();
+                }, 800);
+            }
+        }
+        function resetTurn() {
+            firstCard = null; secondCard = null; pairsLock = false;
+        }
+
+        // Стартовая игра
         initTTT();
     </script>
 </body>
