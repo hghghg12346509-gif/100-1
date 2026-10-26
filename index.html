@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mega Arcade - Мини-игры</title>
+    <title>Mega Arcade - 5 игр</title>
     <style>
         /* ПАЛИТРА: ЧЕРНЫЙ, ЖЕЛТЫЙ, БЕЛЫЙ, КРАСНЫЙ */
         :root {
@@ -36,11 +36,12 @@
         header {
             text-align: center;
             margin: 20px 0;
+            width: 100%;
         }
 
         h1 {
             color: var(--yellow);
-            font-size: 40px;
+            font-size: 36px;
             margin: 0 0 15px 0;
             text-shadow: 3px 3px 0 var(--red);
             letter-spacing: 2px;
@@ -48,16 +49,18 @@
 
         .nav-buttons {
             display: flex;
-            gap: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
             justify-content: center;
+            padding: 0 10px;
         }
 
         .btn-nav {
             background: transparent;
             color: var(--white);
             border: 2px solid var(--white);
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 8px 15px;
+            font-size: 14px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s;
@@ -77,11 +80,13 @@
 
         /* --- КОНТЕЙНЕРЫ ИГР --- */
         .game-container {
-            display: none; /* Скрыто по умолчанию */
+            display: none;
             flex-direction: column;
             align-items: center;
             margin-top: 20px;
             animation: fadeIn 0.3s ease;
+            width: 100%;
+            max-width: 500px;
         }
 
         .game-container.active {
@@ -93,7 +98,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- ИГРА 1: КРЕСТИКИ-НОЛИКИ --- */
+        /* --- КРЕСТИКИ-НОЛИКИ --- */
         #tic-tac-toe-board {
             display: grid;
             grid-template-columns: repeat(3, 100px);
@@ -116,18 +121,17 @@
             transition: background 0.2s;
         }
 
-        .cell:hover {
-            background: var(--gray);
-        }
-
+        .cell:hover { background: var(--gray); }
         .cell.x { color: var(--yellow); text-shadow: 0 0 10px var(--yellow); }
         .cell.o { color: var(--red); text-shadow: 0 0 10px var(--red); }
 
-        /* --- ИГРА 2: ТЕТРИС --- */
+        /* --- ТЕТРИС --- */
         .tetris-wrapper {
             display: flex;
             gap: 20px;
             align-items: flex-start;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         #tetris-canvas {
@@ -137,21 +141,15 @@
             box-shadow: 0 0 15px rgba(255, 204, 0, 0.3);
         }
 
-        .tetris-info {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-        }
-
+        .tetris-info { display: flex; flex-direction: column; gap: 15px; }
         .info-box {
             border: 2px solid var(--white);
-            padding: 15px;
+            padding: 10px;
             text-align: center;
             background: var(--gray);
         }
-
-        .info-box h3 { margin: 0 0 10px 0; color: var(--yellow); font-size: 16px; }
-        .info-box p { margin: 0; font-size: 24px; font-weight: bold; color: var(--white); }
+        .info-box h3 { margin: 0 0 5px 0; color: var(--yellow); font-size: 14px; }
+        .info-box p { margin: 0; font-size: 20px; font-weight: bold; color: var(--white); }
 
         /* --- ОБЩИЕ КНОПКИ --- */
         .btn-action {
@@ -165,6 +163,7 @@
             text-transform: uppercase;
             transition: all 0.2s;
             box-shadow: 0 4px 0 #990000;
+            margin-top: 10px;
         }
 
         .btn-action:active {
@@ -178,6 +177,96 @@
             height: 24px;
             margin: 10px 0;
             color: var(--yellow);
+            text-align: center;
+        }
+
+        /* --- ИГРА 3: РЕФЛЕКС --- */
+        .reflex-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .reflex-cell {
+            background: var(--gray);
+            border: 2px solid #444;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.1s;
+        }
+        .reflex-cell.active {
+            background: var(--yellow);
+            box-shadow: 0 0 20px var(--yellow);
+        }
+        .reflex-cell.error {
+            background: var(--red);
+            box-shadow: 0 0 20px var(--red);
+        }
+
+        /* --- ИГРА 4: ПАМЯТЬ --- */
+        .memory-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 100px);
+            grid-template-rows: repeat(3, 100px);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .memory-cell {
+            background: var(--gray);
+            border: 2px solid #444;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .memory-cell.flash {
+            background: var(--yellow);
+            box-shadow: 0 0 20px var(--yellow);
+        }
+        .memory-cell.correct {
+            background: var(--white);
+            box-shadow: 0 0 20px var(--white);
+            cursor: default;
+        }
+        .memory-cell.wrong {
+            background: var(--red);
+            box-shadow: 0 0 20px var(--red);
+        }
+
+        /* --- ИГРА 5: ЦВЕТОВОЙ КОНТРАСТ --- */
+        .color-word {
+            font-size: 60px;
+            font-weight: 900;
+            margin: 40px 0;
+            text-shadow: 0 0 20px rgba(255,255,255,0.2);
+            letter-spacing: 5px;
+        }
+        .color-btn-container {
+            display: flex;
+            gap: 20px;
+        }
+        .color-btn {
+            width: 120px;
+            height: 60px;
+            border: none;
+            font-size: 20px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 10px;
+            transition: transform 0.1s;
+        }
+        .color-btn:active { transform: scale(0.95); }
+        .color-btn.red-btn { background: var(--red); color: white; box-shadow: 0 0 15px var(--red); }
+        .color-btn.yellow-btn { background: var(--yellow); color: black; box-shadow: 0 0 15px var(--yellow); }
+
+        /* Адаптив для телефонов */
+        @media (max-width: 600px) {
+            .reflex-grid, .memory-grid, #tic-tac-toe-board {
+                grid-template-columns: repeat(3, 80px);
+                grid-template-rows: repeat(3, 80px);
+            }
+            .cell { font-size: 40px; }
+            .color-word { font-size: 40px; }
         }
     </style>
 </head>
@@ -186,19 +275,23 @@
     <header>
         <h1>Mega Arcade</h1>
         <div class="nav-buttons">
-            <button class="btn-nav active" onclick="switchGame('tictactoe')">Крестики-нолики</button>
-            <button class="btn-nav" onclick="switchGame('tetris')">Тетрис</button>
+            <!-- Добавил this в вызов функции для правильного выделения кнопок -->
+            <button class="btn-nav active" onclick="switchGame('tictactoe', this)">Крестики-нолики</button>
+            <button class="btn-nav" onclick="switchGame('tetris', this)">Тетрис</button>
+            <button class="btn-nav" onclick="switchGame('reflex', this)">Рефлекс</button>
+            <button class="btn-nav" onclick="switchGame('memory', this)">Память</button>
+            <button class="btn-nav" onclick="switchGame('color', this)">Контраст</button>
         </div>
     </header>
 
-    <!-- КРЕСТИКИ-НОЛИКИ -->
+    <!-- 1. КРЕСТИКИ-НОЛИКИ -->
     <div id="game-tictactoe" class="game-container active">
         <div class="status-text" id="ttt-status">Ход: Крестики (X)</div>
         <div id="tic-tac-toe-board"></div>
         <button class="btn-action" onclick="resetTTT()">Сбросить игру</button>
     </div>
 
-    <!-- ТЕТРИС -->
+    <!-- 2. ТЕТРИС -->
     <div id="game-tetris" class="game-container">
         <div class="tetris-wrapper">
             <canvas id="tetris-canvas" width="240" height="480"></canvas>
@@ -209,7 +302,7 @@
                 </div>
                 <div class="info-box">
                     <h3>Управление</h3>
-                    <p style="font-size: 12px; color: #aaa;">
+                    <p style="font-size: 12px; color: #aaa; text-align: left;">
                         ← → : Движение<br>
                         ↑ : Поворот<br>
                         ↓ : Ускорить<br>
@@ -221,84 +314,97 @@
         </div>
     </div>
 
+    <!-- 3. РЕФЛЕКС -->
+    <div id="game-reflex" class="game-container">
+        <div class="status-text" id="reflex-status">Нажми "Старт"</div>
+        <div class="reflex-grid" id="reflex-grid"></div>
+        <button class="btn-action" id="reflex-btn" onclick="startReflex()">Старт</button>
+    </div>
+
+    <!-- 4. ПАМЯТЬ -->
+    <div id="game-memory" class="game-container">
+        <div class="status-text" id="memory-status">Нажми "Старт"</div>
+        <div class="memory-grid" id="memory-grid"></div>
+        <button class="btn-action" id="memory-btn" onclick="startMemory()">Старт</button>
+    </div>
+
+    <!-- 5. ЦВЕТОВОЙ КОНТРАСТ -->
+    <div id="game-color" class="game-container">
+        <div class="status-text" id="color-status">Нажми "Старт"</div>
+        <div class="color-word" id="color-word">ГОТОВ?</div>
+        <div class="color-btn-container">
+            <button class="color-btn red-btn" onclick="checkColor('red')">КРАСНЫЙ</button>
+            <button class="color-btn yellow-btn" onclick="checkColor('yellow')">ЖЕЛТЫЙ</button>
+        </div>
+        <button class="btn-action" id="color-btn" onclick="startColorGame()">Старт</button>
+    </div>
+
     <script>
         // ==========================================
-        // ЗВУКОВОЙ ДВИЖОК (8-БИТНЫЕ ЗВУКИ)
+        // ЗВУКОВОЙ ДВИЖОК
         // ==========================================
         let audioCtx;
-        
-        // Инициализация аудио при первом клике (требование браузеров)
         document.body.addEventListener('click', () => {
-            if (!audioCtx) {
-                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-            }
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         }, { once: true });
 
         function playSound(type) {
             if (!audioCtx) return;
             const osc = audioCtx.createOscillator();
             const gain = audioCtx.createGain();
-            osc.connect(gain);
-            gain.connect(audioCtx.destination);
-
+            osc.connect(gain); gain.connect(audioCtx.destination);
             const now = audioCtx.currentTime;
 
             if (type === 'click') {
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.exponentialRampToValueAtTime(600, now + 0.05);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+                osc.type = 'square'; osc.frequency.setValueAtTime(400, now); osc.frequency.exponentialRampToValueAtTime(600, now + 0.05);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
                 osc.start(now); osc.stop(now + 0.05);
-            } 
-            else if (type === 'win') {
-                osc.type = 'square';
-                osc.frequency.setValueAtTime(400, now);
-                osc.frequency.setValueAtTime(600, now + 0.1);
-                osc.frequency.setValueAtTime(800, now + 0.2);
-                osc.frequency.setValueAtTime(1000, now + 0.3);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.5);
+            } else if (type === 'win') {
+                osc.type = 'square'; osc.frequency.setValueAtTime(400, now); osc.frequency.setValueAtTime(600, now + 0.1);
+                osc.frequency.setValueAtTime(800, now + 0.2); osc.frequency.setValueAtTime(1000, now + 0.3);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.5);
                 osc.start(now); osc.stop(now + 0.5);
-            }
-            else if (type === 'tetris_move') {
-                osc.type = 'triangle';
-                osc.frequency.setValueAtTime(150, now);
-                gain.gain.setValueAtTime(0.05, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
+            } else if (type === 'tetris_move') {
+                osc.type = 'triangle'; osc.frequency.setValueAtTime(150, now);
+                gain.gain.setValueAtTime(0.05, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.05);
                 osc.start(now); osc.stop(now + 0.05);
-            }
-            else if (type === 'tetris_clear') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(300, now);
-                osc.frequency.exponentialRampToValueAtTime(800, now + 0.2);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
+            } else if (type === 'tetris_clear') {
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, now); osc.frequency.exponentialRampToValueAtTime(800, now + 0.2);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.exponentialRampToValueAtTime(0.01, now + 0.3);
                 osc.start(now); osc.stop(now + 0.3);
-            }
-            else if (type === 'game_over') {
-                osc.type = 'sawtooth';
-                osc.frequency.setValueAtTime(300, now);
-                osc.frequency.linearRampToValueAtTime(50, now + 0.5);
-                gain.gain.setValueAtTime(0.1, now);
-                gain.gain.linearRampToValueAtTime(0, now + 0.5);
+            } else if (type === 'error') {
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(200, now); osc.frequency.linearRampToValueAtTime(100, now + 0.2);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.2);
+                osc.start(now); osc.stop(now + 0.2);
+            } else if (type === 'game_over') {
+                osc.type = 'sawtooth'; osc.frequency.setValueAtTime(300, now); osc.frequency.linearRampToValueAtTime(50, now + 0.5);
+                gain.gain.setValueAtTime(0.1, now); gain.gain.linearRampToValueAtTime(0, now + 0.5);
                 osc.start(now); osc.stop(now + 0.5);
             }
         }
 
         // ==========================================
-        // НАВИГАЦИЯ ПО ВКЛАДКАМ
+        // НАВИГАЦИЯ (Исправленная)
         // ==========================================
-        function switchGame(game) {
+        function stopAllGames() {
+            clearInterval(tetrisInterval);
+            clearInterval(reflexInterval);
+            clearTimeout(memoryTimeout);
+            clearInterval(colorInterval);
+        }
+
+        function switchGame(game, btnElement) {
+            stopAllGames();
             document.querySelectorAll('.game-container').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.btn-nav').forEach(el => el.classList.remove('active'));
             
             document.getElementById(`game-${game}`).classList.add('active');
-            event.target.classList.add('active');
+            if(btnElement) btnElement.classList.add('active');
 
-            if (game === 'tetris') {
-                initTetris(); // Инициализация при переключении
-            }
+            if (game === 'tetris') initTetris();
+            if (game === 'reflex') initReflex();
+            if (game === 'memory') initMemory();
+            if (game === 'color') initColorGame();
         }
 
         // ==========================================
@@ -341,222 +447,109 @@
                 statusEl.style.color = 'var(--white)';
             } else {
                 currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-                statusEl.textContent = `Ход: ${currentPlayer === 'X' ? 'Крестики' : 'Нолики'} (${currentPlayer})`;
+                statusEl.textContent = `Ход: ${currentPlayer === 'X' ? 'Крестики' : 'Нолики'}`;
                 statusEl.style.color = currentPlayer === 'X' ? 'var(--yellow)' : 'var(--red)';
             }
         }
 
         function checkTTTWin() {
-            const wins = [
-                [0,1,2], [3,4,5], [6,7,8], // Горизонтали
-                [0,3,6], [1,4,7], [2,5,8], // Вертикали
-                [0,4,8], [2,4,6]           // Диагонали
-            ];
+            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
             for (let w of wins) {
                 const [a,b,c] = w;
                 if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) return true;
             }
             return false;
         }
-
-        function resetTTT() {
-            initTTT();
-            playSound('click');
-        }
+        function resetTTT() { initTTT(); playSound('click'); }
 
         // ==========================================
-        // ИГРА 2: ТЕТРИС
+        // ИГРА 2: ТЕТРИС (Сокращенная логика)
         // ==========================================
         const canvas = document.getElementById('tetris-canvas');
         const ctx = canvas.getContext('2d');
         const scoreEl = document.getElementById('tetris-score');
-        
-        const COLS = 10;
-        const ROWS = 20;
-        const BLOCK_SIZE = 24; // 24px * 10 = 240px ширина
-
-        let board = [];
-        let score = 0;
-        let dropCounter = 0;
-        let dropInterval = 800; // Скорость падения в мс
-        let lastTime = 0;
-        let tetrisInterval;
-
-        // Цвета фигур (используем только разрешенные: желтый, красный, белый)
-        const COLORS = [
-            null,
-            '#ffcc00', // Желтый (I)
-            '#ff3333', // Красный (J)
-            '#ffffff', // Белый (L)
-            '#ffcc00', // Желтый (O)
-            '#ff3333', // Красный (S)
-            '#ffffff', // Белый (T)
-            '#ff3333'  // Красный (Z)
-        ];
-
-        // Формы фигур
+        const COLS = 10, ROWS = 20, BLOCK_SIZE = 24;
+        let board, score, dropCounter, dropInterval, lastTime, tetrisInterval;
+        const COLORS = [null, '#ffcc00', '#ff3333', '#ffffff', '#ffcc00', '#ff3333', '#ffffff', '#ff3333'];
         const PIECES = [
-            [],
-            [[0,0,0,0], [1,1,1,1], [0,0,0,0], [0,0,0,0]], // I
-            [[2,0,0], [2,2,2], [0,0,0]],                   // J
-            [[0,0,3], [3,3,3], [0,0,0]],                   // L
-            [[4,4], [4,4]],                                // O
-            [[0,5,5], [5,5,0], [0,0,0]],                   // S
-            [[0,6,0], [6,6,6], [0,0,0]],                   // T
-            [[7,7,0], [0,7,7], [0,0,0]]                    // Z
+            [], [[0,0,0,0],[1,1,1,1],[0,0,0,0],[0,0,0,0]], [[2,0,0],[2,2,2],[0,0,0]], [[0,0,3],[3,3,3],[0,0,0]],
+            [[4,4],[4,4]], [[0,5,5],[5,5,0],[0,0,0]], [[0,6,0],[6,6,6],[0,0,0]], [[7,7,0],[0,7,7],[0,0,0]]
         ];
-
         let player = { pos: {x: 0, y: 0}, matrix: null };
 
-        function createMatrix(w, h) {
-            const matrix = [];
-            while (h--) matrix.push(new Array(w).fill(0));
-            return matrix;
-        }
+        function createMatrix(w, h) { const matrix = []; while (h--) matrix.push(new Array(w).fill(0)); return matrix; }
 
         function initTetris() {
             clearInterval(tetrisInterval);
-            board = createMatrix(COLS, ROWS);
-            score = 0;
-            scoreEl.textContent = score;
-            dropInterval = 800;
-            resetPlayer();
-            
-            lastTime = 0;
+            board = createMatrix(COLS, ROWS); score = 0; scoreEl.textContent = score; dropInterval = 800;
+            resetPlayer(); lastTime = 0;
             tetrisInterval = requestAnimationFrame(updateTetris);
         }
 
         function resetPlayer() {
-            const pieces = '1234567';
-            const randPiece = pieces[Math.floor(Math.random() * pieces.length)];
-            player.matrix = PIECES[randPiece];
-            player.pos.y = 0;
-            player.pos.x = Math.floor(COLS / 2) - Math.floor(player.matrix[0].length / 2);
-
+            const randPiece = '1234567'[Math.floor(Math.random() * 7)];
+            player.matrix = PIECES[randPiece]; player.pos.y = 0; player.pos.x = Math.floor(COLS / 2) - Math.floor(player.matrix[0].length / 2);
             if (collide(board, player)) {
-                // Game Over
-                clearInterval(tetrisInterval);
-                playSound('game_over');
-                board = createMatrix(COLS, ROWS); // Очистка
+                clearInterval(tetrisInterval); playSound('game_over'); board = createMatrix(COLS, ROWS);
                 setTimeout(() => alert('Игра окончена! Твой счет: ' + score), 100);
             }
         }
 
         function collide(board, player) {
-            const m = player.matrix;
-            const o = player.pos;
-            for (let y = 0; y < m.length; ++y) {
-                for (let x = 0; x < m[y].length; ++x) {
-                    if (m[y][x] !== 0 && (board[y + o.y] && board[y + o.y][x + o.x]) !== 0) {
-                        return true;
-                    }
-                }
-            }
+            const m = player.matrix, o = player.pos;
+            for (let y = 0; y < m.length; ++y) for (let x = 0; x < m[y].length; ++x)
+                if (m[y][x] !== 0 && (board[y + o.y] && board[y + o.y][x + o.x]) !== 0) return true;
             return false;
         }
 
         function merge(board, player) {
-            player.matrix.forEach((row, y) => {
-                row.forEach((value, x) => {
-                    if (value !== 0) {
-                        board[y + player.pos.y][x + player.pos.x] = value;
-                    }
-                });
-            });
+            player.matrix.forEach((row, y) => row.forEach((value, x) => { if (value !== 0) board[y + player.pos.y][x + player.pos.x] = value; }));
         }
 
         function rotate(matrix, dir) {
-            for (let y = 0; y < matrix.length; ++y) {
-                for (let x = 0; x < y; ++x) {
-                    [matrix[x][y], matrix[y][x]] = [matrix[y][x], matrix[x][y]];
-                }
-            }
-            if (dir > 0) matrix.forEach(row => row.reverse());
-            else matrix.reverse();
+            for (let y = 0; y < matrix.length; ++y) for (let x = 0; x < y; ++x) [matrix[x][y], matrix[y][x]] = [matrix[y][x], matrix[x][y]];
+            if (dir > 0) matrix.forEach(row => row.reverse()); else matrix.reverse();
         }
 
         function playerDrop() {
             player.pos.y++;
-            if (collide(board, player)) {
-                player.pos.y--;
-                merge(board, player);
-                resetPlayer();
-                clearLines();
-            }
-            dropCounter = 0;
-            playSound('tetris_move');
+            if (collide(board, player)) { player.pos.y--; merge(board, player); resetPlayer(); clearLines(); }
+            dropCounter = 0; playSound('tetris_move');
         }
 
-        function playerMove(dir) {
-            player.pos.x += dir;
-            if (collide(board, player)) player.pos.x -= dir;
-            playSound('tetris_move');
-        }
-
+        function playerMove(dir) { player.pos.x += dir; if (collide(board, player)) player.pos.x -= dir; playSound('tetris_move'); }
         function playerRotate() {
-            const pos = player.pos.x;
-            let offset = 1;
-            rotate(player.matrix, 1);
+            const pos = player.pos.x; let offset = 1; rotate(player.matrix, 1);
             while (collide(board, player)) {
-                player.pos.x += offset;
-                offset = -(offset + (offset > 0 ? 1 : -1));
-                if (offset > player.matrix[0].length) {
-                    rotate(player.matrix, -1);
-                    player.pos.x = pos;
-                    return;
-                }
+                player.pos.x += offset; offset = -(offset + (offset > 0 ? 1 : -1));
+                if (offset > player.matrix[0].length) { rotate(player.matrix, -1); player.pos.x = pos; return; }
             }
             playSound('tetris_move');
         }
 
         function clearLines() {
-            let linesCleared = 0;
+            let lines = 0;
             outer: for (let y = board.length - 1; y >= 0; --y) {
-                for (let x = 0; x < board[y].length; ++x) {
-                    if (board[y][x] === 0) continue outer;
-                }
-                const row = board.splice(y, 1)[0].fill(0);
-                board.unshift(row);
-                ++y;
-                linesCleared++;
+                for (let x = 0; x < board[y].length; ++x) if (board[y][x] === 0) continue outer;
+                const row = board.splice(y, 1)[0].fill(0); board.unshift(row); ++y; lines++;
             }
-            if (linesCleared > 0) {
-                score += linesCleared * 100;
-                scoreEl.textContent = score;
-                playSound('tetris_clear');
-                if (dropInterval > 100) dropInterval -= 50; // Ускорение
-            }
+            if (lines > 0) { score += lines * 100; scoreEl.textContent = score; playSound('tetris_clear'); if (dropInterval > 100) dropInterval -= 50; }
         }
 
         function draw() {
-            // Очистка
-            ctx.fillStyle = '#000000';
-            ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-            // Сетка (едва заметная)
-            ctx.strokeStyle = '#222222';
-            ctx.lineWidth = 1;
-            for (let i = 0; i <= COLS; i++) {
-                ctx.beginPath(); ctx.moveTo(i * BLOCK_SIZE, 0); ctx.lineTo(i * BLOCK_SIZE, canvas.height); ctx.stroke();
-            }
-            for (let j = 0; j <= ROWS; j++) {
-                ctx.beginPath(); ctx.moveTo(0, j * BLOCK_SIZE); ctx.lineTo(canvas.width, j * BLOCK_SIZE); ctx.stroke();
-            }
-
-            drawMatrix(board, {x: 0, y: 0});
-            drawMatrix(player.matrix, player.pos);
+            ctx.fillStyle = '#000000'; ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.strokeStyle = '#222222'; ctx.lineWidth = 1;
+            for (let i = 0; i <= COLS; i++) { ctx.beginPath(); ctx.moveTo(i * BLOCK_SIZE, 0); ctx.lineTo(i * BLOCK_SIZE, canvas.height); ctx.stroke(); }
+            for (let j = 0; j <= ROWS; j++) { ctx.beginPath(); ctx.moveTo(0, j * BLOCK_SIZE); ctx.lineTo(canvas.width, j * BLOCK_SIZE); ctx.stroke(); }
+            drawMatrix(board, {x: 0, y: 0}); drawMatrix(player.matrix, player.pos);
         }
 
         function drawMatrix(matrix, offset) {
             matrix.forEach((row, y) => {
                 row.forEach((value, x) => {
                     if (value !== 0) {
-                        ctx.fillStyle = COLORS[value];
-                        ctx.fillRect((x + offset.x) * BLOCK_SIZE, (y + offset.y) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
-                        // Внутренняя тень для объема
-                        ctx.strokeStyle = '#000';
-                        ctx.lineWidth = 2;
-                        ctx.strokeRect((x + offset.x) * BLOCK_SIZE, (y + offset.y) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+                        ctx.fillStyle = COLORS[value]; ctx.fillRect((x + offset.x) * BLOCK_SIZE, (y + offset.y) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
+                        ctx.strokeStyle = '#000'; ctx.lineWidth = 2; ctx.strokeRect((x + offset.x) * BLOCK_SIZE, (y + offset.y) * BLOCK_SIZE, BLOCK_SIZE - 1, BLOCK_SIZE - 1);
                     }
                 });
             });
@@ -564,36 +557,236 @@
 
         function updateTetris(time = 0) {
             if (!document.getElementById('game-tetris').classList.contains('active')) return;
-
-            const deltaTime = time - lastTime;
-            lastTime = time;
-            dropCounter += deltaTime;
-            
-            if (dropCounter > dropInterval) {
-                playerDrop();
-            }
-            draw();
-            requestAnimationFrame(updateTetris);
+            const deltaTime = time - lastTime; lastTime = time; dropCounter += deltaTime;
+            if (dropCounter > dropInterval) playerDrop();
+            draw(); requestAnimationFrame(updateTetris);
         }
 
-        function resetTetris() {
-            initTetris();
-            playSound('click');
-        }
+        function resetTetris() { initTetris(); playSound('click'); }
 
-        // Управление
         document.addEventListener('keydown', e => {
             if (!document.getElementById('game-tetris').classList.contains('active')) return;
-            
-            if (e.key === 'ArrowLeft') playerMove(-1);
-            else if (e.key === 'ArrowRight') playerMove(1);
-            else if (e.key === 'ArrowDown') playerDrop();
-            else if (e.key === 'ArrowUp') playerRotate();
-            else if (e.key === ' ') { // Пробел - сброс
-                e.preventDefault();
-                resetTetris();
-            }
+            if (e.key === 'ArrowLeft') playerMove(-1); else if (e.key === 'ArrowRight') playerMove(1);
+            else if (e.key === 'ArrowDown') playerDrop(); else if (e.key === 'ArrowUp') playerRotate();
+            else if (e.key === ' ') { e.preventDefault(); resetTetris(); }
         });
+
+        // ==========================================
+        // ИГРА 3: РЕФЛЕКС
+        // ==========================================
+        const reflexGrid = document.getElementById('reflex-grid');
+        const reflexStatus = document.getElementById('reflex-status');
+        const reflexBtn = document.getElementById('reflex-btn');
+        let reflexScore = 0, reflexActiveCell = null, reflexInterval, reflexSpeed = 1000;
+
+        function initReflex() {
+            clearInterval(reflexInterval);
+            reflexGrid.innerHTML = '';
+            reflexScore = 0; reflexSpeed = 1000; reflexStatus.textContent = 'Нажми "Старт"';
+            reflexBtn.textContent = 'Старт';
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('reflex-cell');
+                cell.dataset.index = i;
+                cell.addEventListener('click', () => handleReflexClick(cell));
+                reflexGrid.appendChild(cell);
+            }
+        }
+
+        function startReflex() {
+            initReflex();
+            playSound('click');
+            reflexBtn.textContent = 'Игра идёт...';
+            reflexStatus.textContent = `Счёт: ${reflexScore}`;
+            reflexGrid.querySelectorAll('.reflex-cell').forEach(c => c.classList.remove('active', 'error'));
+            
+            reflexInterval = setInterval(() => {
+                if (reflexActiveCell) {
+                    // Не успел кликнуть
+                    reflexActiveCell.classList.remove('active');
+                    reflexActiveCell.classList.add('error');
+                    gameOverReflex();
+                    return;
+                }
+                const cells = reflexGrid.querySelectorAll('.reflex-cell');
+                cells.forEach(c => c.classList.remove('active', 'error'));
+                reflexActiveCell = cells[Math.floor(Math.random() * 9)];
+                reflexActiveCell.classList.add('active');
+            }, reflexSpeed);
+        }
+
+        function handleReflexClick(cell) {
+            if (cell === reflexActiveCell) {
+                reflexScore++;
+                playSound('win');
+                reflexStatus.textContent = `Счёт: ${reflexScore}`;
+                cell.classList.remove('active');
+                reflexActiveCell = null;
+                if (reflexSpeed > 400) reflexSpeed -= 30; // Ускорение
+                clearInterval(reflexInterval);
+                reflexInterval = setInterval(() => {
+                    if (reflexActiveCell) {
+                        reflexActiveCell.classList.remove('active'); reflexActiveCell.classList.add('error'); gameOverReflex(); return;
+                    }
+                    const cells = reflexGrid.querySelectorAll('.reflex-cell');
+                    cells.forEach(c => c.classList.remove('active', 'error'));
+                    reflexActiveCell = cells[Math.floor(Math.random() * 9)];
+                    reflexActiveCell.classList.add('active');
+                }, reflexSpeed);
+            }
+        }
+
+        function gameOverReflex() {
+            clearInterval(reflexInterval);
+            playSound('game_over');
+            reflexStatus.textContent = `Игра окончена! Счёт: ${reflexScore}`;
+            reflexBtn.textContent = 'Ещё раз';
+            reflexActiveCell = null;
+        }
+
+        // ==========================================
+        // ИГРА 4: ПАМЯТЬ
+        // ==========================================
+        const memoryGrid = document.getElementById('memory-grid');
+        const memoryStatus = document.getElementById('memory-status');
+        const memoryBtn = document.getElementById('memory-btn');
+        let memoryLevel = 1, memoryTargets = [], memoryTimeout, memoryActive = false;
+
+        function initMemory() {
+            clearTimeout(memoryTimeout);
+            memoryGrid.innerHTML = '';
+            memoryLevel = 1; memoryStatus.textContent = 'Нажми "Старт"'; memoryBtn.textContent = 'Старт'; memoryActive = false;
+            for (let i = 0; i < 9; i++) {
+                const cell = document.createElement('div');
+                cell.classList.add('memory-cell');
+                cell.dataset.index = i;
+                cell.addEventListener('click', () => handleMemoryClick(cell));
+                memoryGrid.appendChild(cell);
+            }
+        }
+
+        function startMemory() {
+            initMemory();
+            playSound('click');
+            startMemoryLevel();
+        }
+
+        function startMemoryLevel() {
+            memoryActive = false;
+            memoryGrid.querySelectorAll('.memory-cell').forEach(c => c.className = 'memory-cell');
+            memoryStatus.textContent = `Уровень ${memoryLevel}. Запоминай!`;
+            
+            // Выбираем случайные клетки (количество = уровню)
+            const cells = Array.from(memoryGrid.querySelectorAll('.memory-cell'));
+            memoryTargets = [];
+            const numTargets = Math.min(memoryLevel + 1, 9); // Начинаем с 2 клеток
+            
+            for (let i = 0; i < numTargets; i++) {
+                let randIdx;
+                do { randIdx = Math.floor(Math.random() * 9); } while (memoryTargets.includes(cells[randIdx]));
+                memoryTargets.push(cells[randIdx]);
+                cells[randIdx].classList.add('flash');
+            }
+
+            setTimeout(() => {
+                memoryTargets.forEach(c => c.classList.remove('flash'));
+                memoryStatus.textContent = `Твой ход! Найди ${numTargets}`;
+                memoryActive = true;
+            }, 1000 + (memoryLevel * 200)); // Время на запоминание
+        }
+
+        function handleMemoryClick(cell) {
+            if (!memoryActive || cell.classList.contains('correct')) return;
+            
+            if (memoryTargets.includes(cell)) {
+                cell.classList.add('correct');
+                playSound('click');
+                memoryTargets = memoryTargets.filter(c => c !== cell); // Убираем из списка ненайденных
+                
+                if (memoryTargets.length === 0) {
+                    playSound('win');
+                    memoryLevel++;
+                    memoryStatus.textContent = 'Отлично! Следующий уровень...';
+                    memoryActive = false;
+                    setTimeout(startMemoryLevel, 1000);
+                }
+            } else {
+                cell.classList.add('wrong');
+                memoryActive = false;
+                playSound('game_over');
+                memoryStatus.textContent = `Ошибка! Ты дошёл до уровня ${memoryLevel}`;
+                memoryBtn.textContent = 'Ещё раз';
+            }
+        }
+
+        // ==========================================
+        // ИГРА 5: ЦВЕТОВОЙ КОНТРАСТ
+        // ==========================================
+        const colorWordEl = document.getElementById('color-word');
+        const colorStatus = document.getElementById('color-status');
+        const colorBtn = document.getElementById('color-btn');
+        let colorScore = 0, colorInterval, currentColor, isColorGameActive = false;
+
+        const words = [{text: 'КРАСНЫЙ', code: 'red'}, {text: 'ЖЕЛТЫЙ', code: 'yellow'}];
+
+        function initColorGame() {
+            clearInterval(colorInterval);
+            colorScore = 0; isColorGameActive = false;
+            colorStatus.textContent = 'Нажми "Старт"';
+            colorWordEl.textContent = 'ГОТОВ?';
+            colorWordEl.style.color = 'var(--white)';
+            colorBtn.textContent = 'Старт';
+        }
+
+        function startColorGame() {
+            initColorGame();
+            playSound('click');
+            colorBtn.textContent = 'Игра идёт...';
+            isColorGameActive = true;
+            nextColorRound();
+        }
+
+        function nextColorRound() {
+            if (!isColorGameActive) return;
+            
+            // Выбираем случайное слово и случайный цвет (могут совпадать, могут нет)
+            const wordObj = words[Math.floor(Math.random() * 2)];
+            const colorObj = words[Math.floor(Math.random() * 2)];
+            
+            colorWordEl.textContent = wordObj.text;
+            colorWordEl.style.color = colorObj.code === 'red' ? 'var(--red)' : 'var(--yellow)';
+            currentColor = colorObj.code;
+            
+            colorStatus.textContent = `Счёт: ${colorScore} | Нажми на ЦВЕТ текста!`;
+            
+            // Таймер на ответ (2 секунды)
+            clearTimeout(colorInterval);
+            colorInterval = setTimeout(() => {
+                endColorGame('Не успел!');
+            }, 2000);
+        }
+
+        function checkColor(selectedColor) {
+            if (!isColorGameActive) return;
+            clearTimeout(colorInterval); // Сбрасываем таймер
+            
+            if (selectedColor === currentColor) {
+                colorScore++;
+                playSound('win');
+                nextColorRound();
+            } else {
+                endColorGame('Неправильно!');
+            }
+        }
+
+        function endColorGame(reason) {
+            isColorGameActive = false;
+            playSound('game_over');
+            colorStatus.textContent = `${reason} Твой счёт: ${colorScore}`;
+            colorWordEl.textContent = 'ИГРА ОКОНЧЕНА';
+            colorWordEl.style.color = 'var(--red)';
+            colorBtn.textContent = 'Ещё раз';
+        }
 
         // Инициализация при загрузке
         initTTT();
